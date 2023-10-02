@@ -3,11 +3,13 @@
     --background-panel: #24273D;
     --accent-purple: rgb(237, 75, 255);
     --accent-blue: rgb(75, 75, 255);
+    --base-font: #dbdbdb;
 }
 
 * {
     padding: 0;
     margin: 0;
+    font-family: 'Nunito', sans-serif;
 }
 
 body{
@@ -26,6 +28,39 @@ body{
     height: 95%;
     margin: 30px;
     border-radius: 5px;
+    font-size: 10px;
+    color: var(--base-font);
+}
+
+.sourceCodeFileHeader {
+    font-size: 10px;
+    width: 100%;
+    height: 25px;
+    background: rgba(0, 0, 0, 0.16);
+    display: flex;
+    align-items: center;
+    border-radius: 5px 5px 0 0;
+}
+
+.sourceCodeFileHeaderTitle {
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin-left: 5px;
+}
+
+.sourceCodeFileHeaderName {
+    text-decoration: underline;
+}
+
+.sourceCodeFileHeaderInfo {
+    font-weight: 300;
+    font-size: 13px;
+    margin-right: 5px;
+}
+
+.sourceCodeFileHeaderInfoSpacer {
+    margin-left: auto;
+    margin-right: 15px;
 }
 
 .rightSideToolPanel {
@@ -38,6 +73,20 @@ body{
 .topQuickTollStats {
     display: flex;
     justify-content: space-evenly;
+}
+
+.sourceCodeContents {
+    font-size: 15px;
+    width: 100%;
+    height: inherit;
+    background: none;
+    border-style: none;
+    resize: none;
+    color: var(--base-font);
+    padding: 10px;
+    box-sizing: border-box;
+    outline: none;
+/*    Find a better way to make text field fill up the remaining space consistently*/
 }
 
 .statbox {
