@@ -1,0 +1,71 @@
+:root {
+    --background: #171723;
+    --background-panel: #24273D;
+    --accent-purple: rgb(237, 75, 255);
+    --accent-blue: rgb(75, 75, 255);
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    background: var(--background);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.sourceCodeViewer {
+    background: var(--background-panel);
+    width: 90%;
+    height: 95%;
+    margin: 30px;
+    border-radius: 5px;
+}
+
+.rightSideToolPanel {
+    background: var(--background-panel);
+    height: 100%;
+    width: 25%;
+    margin-left: auto;
+}
+
+.topQuickTollStats {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.statbox {
+    width: 140px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+    margin: 15px;
+    position: relative;
+    padding-left: 14px;
+}
+
+.statbox::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    background: linear-gradient(45deg, var(--accent-purple), var(--accent-blue));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
