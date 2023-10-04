@@ -9,7 +9,6 @@
 * {
     padding: 0;
     margin: 0;
-    font-family: 'Nunito', sans-serif;
 }
 
 body{
@@ -34,6 +33,7 @@ body{
 }
 
 .sourceCodeFileHeader {
+    font-family: 'Nunito', sans-serif;
     font-size: 10px;
     height: 25px;
     width: 100%;
@@ -72,6 +72,7 @@ body{
     height: 100%;
     width: 25%;
     margin-left: auto;
+    font-family: 'Nunito', sans-serif;
 }
 
 .topQuickTollStats {
@@ -79,23 +80,15 @@ body{
     justify-content: space-evenly;
 }
 
-.sourceCodeContents {
-    font-size: 15px;
-    color: var(--base-font);
-    background: rgba(255, 255, 255, 0);
-    padding-left: 2px !important;
-}
-
 .sourceCodePre {
     position: absolute;
-    top: 0;
+    top: 25px;
     bottom: 0;
     left: 0;
     right: 0;
-    overflow: auto;
-    scrollbar-width: thin;
-    padding-top: 10px;
-    padding-left: 0;
+    /*overflow: auto;*/
+    /*scrollbar-width: thin;*/
+    /*font-size: 15px;*/
 }
 
 ::-webkit-scrollbar {
@@ -138,15 +131,14 @@ body{
     -o-border-radius: 5px;
 }
 
-.hljs-ln-numbers {
-    text-align: right;
-    color: #ccc;
-    border-right: 1px solid rgba(204, 204, 204, 0.48);
-    padding-right: 15px !important;
+ace_editor, .ace_editor div {
+    font-family : monospace !important;
+    font-size: 16px !important;
+    direction:ltr !important;
+    text-align:left !important;
 }
 
-/* for block of code */
-.hljs-ln-code {
-    padding-left: 2px !important;
+.ace_gutter-cell {
+    background: var(--background-panel);
+    border-right: 1px solid #777882;;
 }
-

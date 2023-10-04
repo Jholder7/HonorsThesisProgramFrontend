@@ -7,11 +7,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/highlightjs-line-numbers.js/dist/highlightjs-line-numbers.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/go.min.js"></script>
-    <script>hljs.highlightAll(); hljs.initLineNumbersOnLoad();</script>
     <link rel="stylesheet" href="mockUpStyles.css"/>
 </head>
 <body>
@@ -22,7 +17,7 @@
             <h1 class="sourceCodeFileHeaderInfo sourceCodeFileHeaderInfoSpacer">UTF-8</h1>
             <h1 class="sourceCodeFileHeaderInfo">124 Lines</h1>
         </div>
-        <pre class="sourceCodePre"><code class="sourceCodeContents">package edu.murraystate.csc430.game;
+        <div id="editor" class="sourceCodePre">package edu.murraystate.csc430.game;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -174,8 +169,7 @@ public class LimitedVisionObserverTest {
     assertEquals(new SimplePoint(1, 1), blob.getLocation());
   }
 }
-        </code></pre>
-<!--            <textarea class="sourceCodeContents"></textarea>-->
+        </div>
     </section>
     <section class="rightSideToolPanel">
         <section class="topQuickTollStats">
@@ -184,5 +178,12 @@ public class LimitedVisionObserverTest {
             <div class="statbox">4 Comment Count</div>
         </section>
     </section>
+<script src=" https://cdn.jsdelivr.net/npm/ace-builds@1.28.0/src-min-noconflict/ace.min.js "></script>    <script type="text/javascript">
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/one_dark");
+        editor.session.setMode("ace/mode/java");
+        editor.setOption("showPrintMargin", false)
+        editor.container.style.background="transparent"
+    </script>
 </body>
 </html>
