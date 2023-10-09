@@ -142,3 +142,8 @@ ace_editor, .ace_editor div {
     background: var(--background-panel);
     border-right: 1px solid #777882;;
 }
+
+.textHighlight {
+    background: rgba(255, 0, 0, 0.56);
+    position: absolute;
+}

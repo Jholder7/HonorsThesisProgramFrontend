@@ -1,0 +1,96 @@
+:root {
+    --background: #171723;
+    --background-panel: #24273D;
+    --accent-purple: rgb(237, 75, 255);
+    --accent-blue: rgb(75, 75, 255);
+    --base-font: #dbdbdb;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.sourceCodeViewer {
+    background: var(--background-panel);
+    width: 90%;
+    height: 95%;
+    margin: 30px;
+    border-radius: 5px;
+    font-size: 10px;
+    color: var(--base-font);
+    position: relative;
+}
+
+.sourceCodeFileHeader {
+    font-family: 'Nunito', sans-serif;
+    font-size: 10px;
+    height: 25px;
+    width: 100%;
+    background: #1e2133;
+    display: flex;
+    align-items: center;
+    border-radius: 5px 5px 0 0;
+    position: absolute;
+    margin-bottom: 2px;
+    z-index: 3;
+}
+
+.sourceCodeFileHeaderTitle {
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin-left: 5px;
+}
+
+.sourceCodePre {
+    position: absolute !important;
+    top: 25px !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: initial !important;
+    height: initial !important;
+}
+
+.sourceCodeFileHeaderName {
+    text-decoration: underline;
+}
+
+.sourceCodeFileHeaderInfo {
+    font-weight: 300;
+    font-size: 13px;
+    margin-right: 5px;
+}
+
+ace_editor, .ace_editor div {
+    font-family : monospace !important;
+    font-size: 16px !important;
+    direction:ltr !important;
+    text-align:left !important;
+}
+
+.ace_gutter-cell {
+    background: var(--background-panel);
+    border-right: 1px solid #777882;;
+}
+
+.textHighlight {
+    background: rgba(255, 0, 0, 0.56);
+    position: absolute;
+}
+
+.sourceCodeFileHeaderInfoSpacer {
+    margin-left: auto;
+    margin-right: 15px;
+}
+
+::-webkit-scrollbar {
+    height: 12px;
+    width: 8px;
+    background: #1F2132;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #777882;
+    -webkit-border-radius: 1ex;
+}

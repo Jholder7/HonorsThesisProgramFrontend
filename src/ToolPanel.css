@@ -1,0 +1,23 @@
+.rightSideToolPanel {
+    background: var(--background-panel);
+    height: 100%;
+    width: 25%;
+    margin-left: auto;
+    font-family: 'Nunito', sans-serif;
+}
+
+.topQuickToolStats {
+     display: flex;
+     justify-content: space-evenly;
+}
+
+.sourceCodePre {
+    position: absolute;
+    top: 25px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    /*overflow: auto;*/
+    /*scrollbar-width: thin;*/
+    /*font-size: 15px;*/
+}

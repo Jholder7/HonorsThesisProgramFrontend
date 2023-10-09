@@ -17,159 +17,16 @@
             <h1 class="sourceCodeFileHeaderInfo sourceCodeFileHeaderInfoSpacer">UTF-8</h1>
             <h1 class="sourceCodeFileHeaderInfo">124 Lines</h1>
         </div>
-        <div id="editor" class="sourceCodePre">package edu.murraystate.csc430.game;
+        <div id="editor" class="sourceCodePre">class Main {
+  public static void main(String[] args) {
+    int first = 10;
+    int second = 20;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.withSettings;
-
-import edu.murraystate.csc430.api.blob.BlobView;
-import edu.murraystate.csc430.api.geometry.Point;
-import edu.murraystate.csc430.api.geometry.SimplePoint;
-import edu.murraystate.csc430.api.movement.MoveStrategy;
-import edu.murraystate.csc430.model.blobs.HasLocation;
-
-import java.util.*;
-
-import edu.murraystate.csc430.model.blobs.SimpleBlob;
-import org.junit.Assert;
-import org.junit.Test;
-import org.mockito.Mockito;
-import org.mockito.internal.verification.VerificationModeFactory;
-
-public class LimitedVisionObserverTest {
-  @Test(expected = NullPointerException.class)
-  public void constructorFailOnNullObserver() {
-    new LimitedVisionObserver(null, 10);
+    // add two numbers
+    int sum = first + second;
+    System.out.println(first + " + " + second + " = "  + sum);
   }
-
-  @Test
-  public void oneWithinDistance() {
-    final HasLocation observer =
-            (HasLocation) mock(GameStateObserver.class,
-                    withSettings().extraInterfaces(HasLocation.class));
-    final Point p = new SimplePoint(10,100);
-    when(observer.getLocation()).thenReturn(p);
-    when(observer.getX()).thenReturn(p.x);
-    when(observer.getY()).thenReturn(p.y);
-    final BlobView nearView = mock(BlobView.class);
-    when(nearView.getLocation()).thenReturn(new SimplePoint(11, 100));
-    final BlobView farView = mock(BlobView.class);
-    when(farView.getLocation()).thenReturn(new SimplePoint(1000, 2000));
-    final List<BlobView> views = Arrays.asList(farView, nearView, farView);
-    final GameStateObserver lvObserver = new LimitedVisionObserver((GameStateObserver) observer, 2);
-    lvObserver.updateLocations(views);
-    verify((GameStateObserver) observer, VerificationModeFactory.times(1)).updateLocations(Arrays.asList(nearView));
-  }
-
-  @Test
-  public void equalsSelf() {
-    final GameStateObserver observer = mock(GameStateObserver.class);
-    final LimitedVisionObserver lvObserver = new LimitedVisionObserver(observer, 10);
-    Assert.assertEquals(lvObserver, lvObserver);
-  }
-
-  @Test
-  public void ignoreUpdatesForNonLocationObservers() {
-    final GameStateObserver observer = mock(GameStateObserver.class);
-    final LimitedVisionObserver lvObserver = new LimitedVisionObserver(observer, 10);
-    final List<BlobView> views = mock(List.class);
-    lvObserver.updateLocations(views);
-    verify(observer, Mockito.times(1)).updateLocations(Collections.emptyList());
-  }
-
-  @Test
-  public void inclusiveTest_Custom() {
-    Game game = new Game(5);
-    SimpleBlob blob = new SimpleBlob(new SimplePoint(0, 0), new MoveStrategy() {
-      @Override
-      public Optional<Point> move(BlobView blobView, List<BlobView> list) {
-        if (list.size() >= 1){
-          return Optional.of(new SimplePoint(5, 5));
-        } else {
-          return Optional.of(new SimplePoint(1, 1));
-        }
-      }
-    }, game);
-    SimpleBlob blob2 = new SimpleBlob(new SimplePoint(5, 0), new MoveStrategy() {
-      @Override
-      public Optional<Point> move(BlobView blobView, List<BlobView> list) {
-        return Optional.empty();
-      }
-    }, game);
-    game.joinGame(blob2);
-    game.executeMove();
-    assertEquals(new SimplePoint(5, 5), blob.getLocation());
-  }
-
-  @Test
-  public void nonEqualityTest_Custom() {
-    final GameStateObserver observer = mock(GameStateObserver.class);
-    final LimitedVisionObserver Observer = new LimitedVisionObserver(observer, 10);
-    assertFalse(Observer.equals(null));
-    assertFalse(observer.equals(new SimplePoint(5, 5)));
-  }
-
-  @Test
-  public void isEqualityTest_Custom() {
-    final GameStateObserver observer = mock(GameStateObserver.class);
-    final LimitedVisionObserver Observer = new LimitedVisionObserver(observer, 10);
-    final LimitedVisionObserver Observer2 = new LimitedVisionObserver(observer, 10000);
-    Assert.assertTrue(Observer.equals(Observer2));
-  }
-
-  @Test
-  public void hashCodeTest_Custom() {
-    //TODO: Confirm
-    final GameStateObserver observer = mock(GameStateObserver.class);
-    final LimitedVisionObserver Observer = new LimitedVisionObserver(observer, 10);
-    final LimitedVisionObserver Observer2 = new LimitedVisionObserver(observer, 10000);
-    Assert.assertTrue(Observer.hashCode() == Observer2.hashCode());
-  }
-
-  @Test
-  public void updateLocationWithEmptyInputTest_Customer() {
-    final GameStateObserver observer = mock(GameStateObserver.class);
-    final LimitedVisionObserver lvObserver = new LimitedVisionObserver(observer, 10);
-    lvObserver.updateLocations(new ArrayList<>());
-    verify(observer, Mockito.times(1)).updateLocations(Collections.emptyList());
-  }
-
-  @Test(expected = NullPointerException.class)
-  public void updateLocationWithNull_Custom() {
-    final GameStateObserver observer = mock(GameStateObserver.class);
-    final LimitedVisionObserver lvObserver = new LimitedVisionObserver(observer, 10);
-    lvObserver.updateLocations(null);
-  }
-
-  @Test
-  public void updateLocationWithAllPointToFarTest_Custom() {
-    Game game = new Game(5);
-    SimpleBlob blob = new SimpleBlob(new SimplePoint(0, 0), new MoveStrategy() {
-      @Override
-      public Optional<Point> move(BlobView blobView, List<BlobView> list) {
-        if (list.size() >= 1){
-          return Optional.of(new SimplePoint(5, 5));
-        } else {
-          return Optional.of(new SimplePoint(1, 1));
-        }
-      }
-    }, game);
-    SimpleBlob blob2 = new SimpleBlob(new SimplePoint(10, 0), new MoveStrategy() {
-      @Override
-      public Optional<Point> move(BlobView blobView, List<BlobView> list) {
-        return Optional.empty();
-      }
-    }, game);
-    game.joinGame(blob2);
-    game.executeMove();
-    assertEquals(new SimplePoint(1, 1), blob.getLocation());
-  }
-}
-        </div>
+}</div>
     </section>
     <section class="rightSideToolPanel">
         <section class="topQuickTollStats">
@@ -178,12 +35,18 @@ public class LimitedVisionObserverTest {
             <div class="statbox">4 Comment Count</div>
         </section>
     </section>
-<script src=" https://cdn.jsdelivr.net/npm/ace-builds@1.28.0/src-min-noconflict/ace.min.js "></script>    <script type="text/javascript">
+<script src=" https://cdn.jsdelivr.net/npm/ace-builds@1.28.0/src-min-noconflict/ace.min.js "></script>
+<!--<link href=" https://cdn.jsdelivr.net/npm/ace-builds@1.28.0/css/ace.min.css " rel="stylesheet">-->
+<script type="text/javascript">
         var editor = ace.edit("editor");
         editor.setTheme("ace/theme/one_dark");
         editor.session.setMode("ace/mode/java");
         editor.setOption("showPrintMargin", false)
         editor.container.style.background="transparent"
+
+        function highlightLine(x,y, x1, y1) {
+            editor.session.addMarker(new ace.Range(x,y,x1,y1), "textHighlight", "text");
+        }
     </script>
 </body>
 </html>
