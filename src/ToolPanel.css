@@ -4,6 +4,8 @@
     width: 25%;
     margin-left: auto;
     font-family: 'Nunito', sans-serif;
+    display: flex;
+    flex-direction: column;
 }
 
 .topQuickToolStats {

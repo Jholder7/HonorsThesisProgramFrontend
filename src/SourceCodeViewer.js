@@ -33,8 +33,41 @@ function SourceCodeViewer() {
 
     SourceCodeViewer.setFileTitle = setFileTitle;
 
+    const drop = React.useRef(null);
+
+    const handleDragOver = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+    };
+
+    const handleDrop = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const {files} = e.dataTransfer;
+
+        if (files && files.length) {
+            let reader = new FileReader();
+            reader.onload = function (event) {
+                updateEditorInfo(event.target.result);
+                setFileTitle(files[0].name);
+            };
+            reader.readAsText(files[0]);
+        }
+    };
+
+    React.useEffect(() => {
+        drop.current.addEventListener('dragover', handleDragOver);
+        drop.current.addEventListener('drop', handleDrop);
+
+        return () => {
+            drop.current.removeEventListener('dragover', handleDragOver);
+            drop.current.removeEventListener('drop', handleDrop);
+        };
+    }, []);
+
     return (
-        <div className="sourceCodeViewer">
+        <div ref={drop} className="sourceCodeViewer">
             <header>
                 <link rel="stylesheet" href="SourceCodeViewer.css" />
             </header>
@@ -50,6 +83,7 @@ function SourceCodeViewer() {
                 className="sourceCodePre"
                 mode="java"
                 theme="one_dark"
+                placeholder="Type a program here or drag and drop a file here to upload!"
                 onChange={updateEditorInfo}
                 name="editor"
                 editorProps={{ $blockScrolling: true }}
