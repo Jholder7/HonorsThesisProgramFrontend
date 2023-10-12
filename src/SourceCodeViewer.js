@@ -13,6 +13,7 @@ function SourceCodeViewer() {
     let [markers, setMarkers] = useState([]);
     let [fileTitle, setFileTitle] = useState("FileName.java")
 
+    SourceCodeViewer.setMarkers = setMarkers;
 
     function updateEditorInfo (newValue) {
         let lines = newValue.split('\n');
@@ -26,12 +27,26 @@ function SourceCodeViewer() {
     }
     SourceCodeViewer.setViewerText = setViewerText;
 
+    let ID = 0
     function newMarker(row, column, row1, column1){
-        setMarkers([...markers, {id: 0, startRow: row, startCol: column, endRow: row1, endCol: column1, className: 'textHighlight', type: 'background' }]);
+        console.log(markers);
+        ID++;
+        setMarkers(prevState => [...prevState, {id: ID, startRow: row, startCol: column, endRow: row1, endCol: column1, className: 'textHighlight', type: 'text' }])
+        // setMarkers([...markers, {id: ID, startRow: row, startCol: column, endRow: row1, endCol: column1, className: 'textHighlight', type: 'text' }]);
     }
     SourceCodeViewer.newMarker = newMarker;
 
     SourceCodeViewer.setFileTitle = setFileTitle;
+
+    function getSourceCode(){
+        return editorText;
+    }
+    SourceCodeViewer.getSourceCode = getSourceCode;
+
+    function getFileTitle() {
+        return fileTitle;
+    }
+    SourceCodeViewer.getFileTitle = getFileTitle;
 
     const drop = React.useRef(null);
 
@@ -88,7 +103,8 @@ function SourceCodeViewer() {
                 name="editor"
                 editorProps={{ $blockScrolling: true }}
                 setOptions={{
-                    printMargin: false
+                    printMargin: false,
+                    useSoftTabs: false
                 }}
             />
         </div>

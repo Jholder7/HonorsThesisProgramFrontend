@@ -3,6 +3,13 @@ import SourceCodeViewer from "./SourceCodeViewer";
 import ToolPanel from "./ToolPanel";
 
 function App() {
+    let apiBaseServer = "http://localhost:8080"
+    function getApiBaseAddress(){
+        return apiBaseServer;
+    }
+    App.getApiBaseAddress = getApiBaseAddress;
+
+
   return (
     <div className="App">
       <header>
