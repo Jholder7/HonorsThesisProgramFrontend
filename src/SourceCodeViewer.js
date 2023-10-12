@@ -15,7 +15,10 @@ function SourceCodeViewer() {
 
     SourceCodeViewer.setMarkers = setMarkers;
 
+    //TODO: Add count down timer from last edit and if no changes within 10 seconds re execute eval
     function updateEditorInfo (newValue) {
+        //TODO: Clear style issues on clear
+        //SourceCodeViewer.setMarkers([]);
         let lines = newValue.split('\n');
         setLineCount(lines.length);
         setEditorText(newValue);
@@ -56,6 +59,7 @@ function SourceCodeViewer() {
     };
 
     const handleDrop = (e) => {
+
         e.preventDefault();
         e.stopPropagation();
 

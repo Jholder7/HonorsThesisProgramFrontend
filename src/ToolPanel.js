@@ -15,7 +15,6 @@ function ToolPanel() {
     ToolPanel.setStuleErrors = setStyleErrors;
 
     function executeEval() {
-        console.log("request sent")
         SourceCodeViewer.setMarkers([]);
 
         const req =  {
@@ -40,9 +39,8 @@ function ToolPanel() {
                     let x = source.slice(0, segment.segmentData[0]).split("\n").length-1;
                     let y = source.slice(0, segment.segmentData[0]).split("\n").slice(-1)[0].length;
                     let x1 = source.slice(0, segment.segmentData[1]).split("\n").length-1;
-                    let y1 = source.slice(0, segment.segmentData[1]).split("\n").slice(-1)[0].length;
-                    SourceCodeViewer.newMarker(x, y, x, y1+1);
-                    console.log(x, y, x, y1+1);
+                    let y1 = source.slice(0, segment.segmentData[1]).split("\n").slice(-1)[0].length-1;
+                    SourceCodeViewer.newMarker(x, y, x1, y1+1);
                 });
             });
     }
