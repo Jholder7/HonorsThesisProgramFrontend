@@ -10,7 +10,7 @@ function EvalButton(props) {
             <header>
                 <link rel="stylesheet" href="EvalButton.css" />
             </header>
-            Compute
+            {props.title}
         </button>
     );
 }

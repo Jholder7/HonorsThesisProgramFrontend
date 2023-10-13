@@ -6,7 +6,6 @@ import CommentCount from "./StatBoxes/CommentCount";
 import EvalButton from "./EvalButton";
 import SourceCodeViewer from "./SourceCodeViewer";
 import App from "./App";
-import styleErrors from "./StatBoxes/StyleErrors";
 
 function ToolPanel() {
 
@@ -51,13 +50,14 @@ function ToolPanel() {
                 <link type="text/css" rel="stylesheet" href="ToolPanel.css" />
             </header>
             <section className="topQuickToolStats">
-                <StyleErrors value="5"/>
-                <ETCR value="12%"/>
-                <CommentCount value="12"/>
+                <StyleErrors value="--"/>
+                <ETCR value="--%"/>
+                <CommentCount value="--"/>
             </section>
-            <button onClick={() =>{StyleErrors.setValue("test")}}>Test</button>
+            <button onClick={() =>{App.setSettingsIsOpen(false)}}>Close Menu</button>
             <section className="topQuickToolStats" style={{"margin-top": "auto", "margin-bottom": "25px"}}>
-                <EvalButton callback={() =>{executeEval()}}/>
+                <EvalButton title="Compute" callback={() =>{executeEval()}}/>
+                <EvalButton title="Settings" callback={() =>{App.setSettingsIsOpen(true)}}/>
             </section>
         </div>
     );

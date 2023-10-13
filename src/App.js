@@ -1,8 +1,13 @@
 import './App.css';
 import SourceCodeViewer from "./SourceCodeViewer";
 import ToolPanel from "./ToolPanel";
+import SettingsModal from "./SettingsModal";
+import {useState} from "react";
 
 function App() {
+    const [isSettingsOpen, setSettingsIsOpen] = useState(false);
+    App.setSettingsIsOpen = setSettingsIsOpen;
+
     let apiBaseServer = "http://localhost:8080"
     function getApiBaseAddress(){
         return apiBaseServer;
@@ -21,6 +26,9 @@ function App() {
       <div className="body">
         <SourceCodeViewer/>
         <ToolPanel/>
+      </div>
+      <div>
+          {isSettingsOpen && <SettingsModal setIsOpen={setSettingsIsOpen}/>}
       </div>
     </div>
   );
