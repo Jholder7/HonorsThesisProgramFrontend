@@ -1,6 +1,6 @@
 .settingsFrame {
-    width: 70%;
-    height: 70%;
+    width: 85%;
+    height: 85%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,15 +11,84 @@
     background: linear-gradient(45deg, var(--accent-purple), var(--accent-blue));
     border-radius: 5px;
     border-style: none;
-    z-index: 20;
+}
+
+.grayOutPane{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 19;
+    background: rgba(0, 0, 0, 0.54);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+/*TODO: The way this is handled causes border visibility issues on resize events*/
 .settingsManu {
-    width: 99.7%;
-    height: 99.4%;
-    background: #171723;
-    border-radius: 3px;
+    width: 99.9%;
+    height: 99.7%;
+    background: #24273D;
+    border-radius: 5px;
+}
+
+.titleBar{
+    display: flex;
+    align-items: center;
+}
+
+.title {
+    font-size: 22px;
+    font-weight: 400;
+    padding: 5px;
+    padding-top: 2px;
+    text-align: center;
+}
+
+.titleBar::after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, #BA4BFF, #4E4BFF);;
+    transform: translate(-1px, 20px);
+}
+
+.exitButton {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 15px;
+    position: relative;
+    background: linear-gradient(45deg, #793292, #4037AC);
+    border-radius: 5px;
+    border-style: none;
+    margin-right: 5px;
+    margin-left: auto;
+}
+
+.exitButton:hover {
+    background: linear-gradient(45deg, #4b1f5d, #2a2675);
+}
+
+.exitButton::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 2px;
+    background: linear-gradient(45deg, var(--accent-purple), var(--accent-blue));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
 }

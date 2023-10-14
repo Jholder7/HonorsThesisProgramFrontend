@@ -38,7 +38,7 @@ function ToolPanel() {
                     let x = source.slice(0, segment.segmentData[0]).split("\n").length-1;
                     let y = source.slice(0, segment.segmentData[0]).split("\n").slice(-1)[0].length;
                     let x1 = source.slice(0, segment.segmentData[1]).split("\n").length-1;
-                    let y1 = source.slice(0, segment.segmentData[1]).split("\n").slice(-1)[0].length-1;
+                    let y1 = source.slice(0, segment.segmentData[1]).split("\n").slice(-1)[0].length;
                     SourceCodeViewer.newMarker(x, y, x1, y1+1);
                 });
             });
@@ -54,7 +54,6 @@ function ToolPanel() {
                 <ETCR value="--%"/>
                 <CommentCount value="--"/>
             </section>
-            <button onClick={() =>{App.setSettingsIsOpen(false)}}>Close Menu</button>
             <section className="topQuickToolStats" style={{"margin-top": "auto", "margin-bottom": "25px"}}>
                 <EvalButton title="Compute" callback={() =>{executeEval()}}/>
                 <EvalButton title="Settings" callback={() =>{App.setSettingsIsOpen(true)}}/>
