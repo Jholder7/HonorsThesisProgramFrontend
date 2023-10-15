@@ -1,0 +1,63 @@
+.optionsTab {
+    position: absolute;
+    top: 41px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.tabSelectBar {
+    width: 99.9%;
+    height: 30px;
+    display: flex;
+}
+
+.selectedTab {
+    background: #24273D !important;
+}
+
+.tab {
+    margin-top: 5px;
+    background: #131621;
+    border-style: solid;
+    border-bottom-style: None;
+    border-width: 1px;
+    border-color: #131621;
+    width: 170px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px 8px 0 0;
+}
+
+.tab:hover {
+    background: rgba(19, 22, 33, 0.27);
+}
+
+.tabTitle {
+    font-size: 15px;
+    font-weight: 100;
+    color: white;
+}
+
+.settingsPage {
+    position: absolute;
+    top: 37px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    padding: 5px;
+    overflow: auto;
+}
+
+.settings {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.settingsTitle {
+    font-size: 20px;
+    text-decoration: underline;
+    font-weight: 500;
+}

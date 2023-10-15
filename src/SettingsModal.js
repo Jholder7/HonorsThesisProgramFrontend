@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import './SettingsModal.css'
 import App from "./App";
-import EvalButton from "./EvalButton";
+import OptionTabs from "./OptionComponents/OptionTabs";
 
 const SettingsModal = ({ setIsOpen }) => {
     return (
@@ -15,6 +15,7 @@ const SettingsModal = ({ setIsOpen }) => {
                         <h3 className="title">Evaluator Settings</h3>
                         <button className="exitButton" onClick={() =>{App.setSettingsIsOpen(false)}}>✖</button>
                     </div>
+                    <OptionTabs />
                 </section>
             </div>
         </div>
