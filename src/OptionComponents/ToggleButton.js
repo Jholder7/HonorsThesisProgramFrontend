@@ -8,7 +8,7 @@ function ToggleButton (props) {
 
 
     return (
-        <button onClick={() => {setSelected(!isSelected)}} className="toggleButton">
+        <button onClick={() => {setSelected(!isSelected); if (props.onClick != null && !isSelected) props.onClick()}} className={`toggleButton ${isSelected ? 'backgroundTicked' : ''}`}>
             <header>
                 <link rel="stylesheet" href="ToggleButton.css" />
                 <link rel="stylesheet" href="atom-one-dark.css"/>
@@ -22,6 +22,7 @@ function ToggleButton (props) {
             <Highlight className={"codePreview " + props.language}>
                 {props.preview}
             </Highlight>
+            <h4 style={{"margin": "10px", "margin-top": "auto"}}>{"Languages: " + props.supportedLanguages}</h4>
         </button>
     );
 }
