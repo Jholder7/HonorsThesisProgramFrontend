@@ -6,6 +6,7 @@ import CommentCount from "./StatBoxes/CommentCount";
 import EvalButton from "./EvalButton";
 import SourceCodeViewer from "./SourceCodeViewer";
 import App from "./App";
+import OptionTabs from "./OptionComponents/OptionTabs";
 
 function ToolPanel() {
 
@@ -18,9 +19,11 @@ function ToolPanel() {
 
         const req =  {
             fileTitle: SourceCodeViewer.getFileTitle(),
-            fileContents: SourceCodeViewer.getSourceCode().replaceAll("\r", "").replaceAll("\"", "\u0022")
+            fileContents: SourceCodeViewer.getSourceCode().replaceAll("\r", "").replaceAll("\"", "\u0022"),
+            settings: OptionTabs.settings
         }
         let orig = SourceCodeViewer.getSourceCode()
+        // console.log(OptionTabs.settings)
         fetch(App.getApiBaseAddress()+"/api-v1/baseService/evalFile", {
             method: 'POST',
             headers: {
@@ -33,6 +36,7 @@ function ToolPanel() {
                 StyleErrors.setValue(data.styleErrors)
                 ETCR.setValue(data.ETCR)
                 CommentCount.setValue(data.CommentCount)
+                console.log(data)
                 data.issueSegments.forEach((segment) => {
                     let source = SourceCodeViewer.getSourceCode().replaceAll("\r", "").replaceAll("\"", "\u0022")
                     let x = source.slice(0, segment.segmentData[0]).split("\n").length-1;

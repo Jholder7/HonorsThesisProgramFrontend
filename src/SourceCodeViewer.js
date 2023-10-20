@@ -32,7 +32,7 @@ function SourceCodeViewer() {
 
     let ID = 0
     function newMarker(row, column, row1, column1){
-        console.log(markers);
+        // console.log(markers);
         ID++;
         setMarkers(prevState => [...prevState, {id: ID, startRow: row, startCol: column, endRow: row1, endCol: column1, className: 'textHighlight', type: 'text' }])
         // setMarkers([...markers, {id: ID, startRow: row, startCol: column, endRow: row1, endCol: column1, className: 'textHighlight', type: 'text' }]);
