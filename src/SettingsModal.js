@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import './SettingsModal.css'
 import App from "./App";
 import OptionTabs from "./OptionComponents/OptionTabs";
+import ToolPanel from "./ToolPanel";
 
 const SettingsModal = ({ setIsOpen }) => {
     return (
@@ -12,8 +13,8 @@ const SettingsModal = ({ setIsOpen }) => {
             <div className="settingsFrame">
                 <section className="settingsManu">
                     <div className="titleBar">
-                        <h3 className="title">Evaluator Settings</h3>
-                        <button className="exitButton" onClick={() =>{App.setSettingsIsOpen(false)}}>✖</button>
+                        <h3 className="title">Style Options</h3>
+                        <button className="exitButton" onClick={() =>{ToolPanel.evalTextUpdate(); App.setSettingsIsOpen(false)}}>✖</button>
                     </div>
                     <OptionTabs />
                 </section>

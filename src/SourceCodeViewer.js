@@ -5,6 +5,7 @@ import React, {useState} from "react";
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/theme-one_dark";
 import "ace-builds/src-noconflict/ext-language_tools";
+import ToolPanel from "./ToolPanel";
 
 function SourceCodeViewer() {
 
@@ -12,16 +13,21 @@ function SourceCodeViewer() {
     let [editorText, setEditorText] = useState("");
     let [markers, setMarkers] = useState([]);
     let [fileTitle, setFileTitle] = useState("FileName.java")
-
+    let [status, setStatus] = useState("Waiting...")
+    SourceCodeViewer.setStatus = setStatus;
     SourceCodeViewer.setMarkers = setMarkers;
 
     //TODO: Add count down timer from last edit and if no changes within 10 seconds re execute eval
+    let OldValue = "-1";
     function updateEditorInfo (newValue) {
         //TODO: Clear style issues on clear
-        //SourceCodeViewer.setMarkers([]);
-        let lines = newValue.split('\n');
-        setLineCount(lines.length);
-        setEditorText(newValue);
+        if (newValue !== OldValue) {
+            SourceCodeViewer.setMarkers([]);
+            let lines = newValue.split('\n');
+            setLineCount(lines.length);
+            setEditorText(newValue);
+            ToolPanel.evalTextUpdate();
+        }
     }
     SourceCodeViewer.setViewerText = setViewerText;
 
@@ -92,7 +98,8 @@ function SourceCodeViewer() {
             </header>
             <div className="sourceCodeFileHeader">
                 <h1 className="sourceCodeFileHeaderTitle">./<span className="sourceCodeFileHeaderName">{fileTitle}</span></h1>
-                <h1 className="sourceCodeFileHeaderInfo sourceCodeFileHeaderInfoSpacer">UTF-8</h1>
+                <h1 className="sourceCodeFileHeaderInfo sourceCodeFileHeaderInfoSpacer">{status}</h1>
+                <h1 className="sourceCodeFileHeaderInfo" style={{"margin-right": "15px"}}>UTF-8</h1>
                 <h1 id="lineCount" className="sourceCodeFileHeaderInfo">{lineCount} Lines</h1>
             </div>
             <AceEditor
