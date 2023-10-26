@@ -7,9 +7,13 @@ import EvalButton from "./EvalButton";
 import SourceCodeViewer from "./SourceCodeViewer";
 import App from "./App";
 import OptionTabs from "./OptionComponents/OptionTabs";
+import ErrorCard from "./ErrorCard"
 import "./resources/arrow.svg"
+import {useLocalStorage} from "@uidotdev/usehooks";
 
 function ToolPanel() {
+    const [errors, setErrors] = useState([])
+    const [settings, saveSettings] = useLocalStorage("settings", [])
 
     function setStyleErrors(count) {
     }
@@ -33,7 +37,7 @@ function ToolPanel() {
         const req =  {
             fileTitle: SourceCodeViewer.getFileTitle(),
             fileContents: SourceCodeViewer.getSourceCode().replaceAll("\r", "").replaceAll("\"", "\u0022"),
-            settings: OptionTabs.settings
+            settings: settings
         }
         let orig = SourceCodeViewer.getSourceCode()
         // console.log(OptionTabs.settings)
@@ -49,7 +53,6 @@ function ToolPanel() {
                 StyleErrors.setValue(data.styleErrors)
                 ETCR.setValue(data.ETCR)
                 CommentCount.setValue(data.CommentCount)
-                console.log(data)
                 data.issueSegments.forEach((segment) => {
                     let source = SourceCodeViewer.getSourceCode().replaceAll("\r", "").replaceAll("\"", "\u0022")
                     let x = source.slice(0, segment.segmentData[0]).split("\n").length-1;
@@ -57,6 +60,13 @@ function ToolPanel() {
                     let x1 = source.slice(0, segment.segmentData[1]).split("\n").length-1;
                     let y1 = source.slice(0, segment.segmentData[1]).split("\n").slice(-1)[0].length;
                     SourceCodeViewer.newMarker(x, y, x1, y1+1);
+                });
+                let id = 1;
+                setErrors([]);
+                data.issueSegmentLiterals.forEach((segmentLiteral) => {
+                    let newSegLit = {"id": id, "preText": segmentLiteral.segmentLiteralData[0], "postText": segmentLiteral.segmentLiteralData[1], "deduction": parseFloat(segmentLiteral.segmentLiteralData[2])};
+                    setErrors(prevState => [...prevState, newSegLit]);
+                    id++;
                 });
             });
     }
@@ -72,44 +82,9 @@ function ToolPanel() {
                 <CommentCount value="--"/>
             </section>
             <section className="errorSection">
-                <div className="errorCard">
-                    <div className="errorTitle">
-                        <h>Error #1</h>
-                        <button>Toggle</button>
-                    </div>
-                    <div className="errorComparison">
-                        <div className="errorCompBox">
-                            <p className="errorCompBoxText">This</p>
-                        </div>
-                        <svg style={{"margin": "-15px"}} fill="#40424b" width="60px" height="60px" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m10.211 7.155c-.141-.108-.3-.157-.456-.157-.389 0-.755.306-.755.749v8.501c0 .445.367.75.755.75.157 0 .316-.05.457-.159 1.554-1.203 4.199-3.252 5.498-4.258.184-.142.29-.36.29-.592 0-.23-.107-.449-.291-.591zm.289 7.563v-5.446l3.522 2.719z" fill-rule="nonzero"/></svg>
-                        <div className="errorCompBox">
-                            <p className="errorCompBoxText">To This</p>
-                        </div>
-                        <div className="errorDeduction">
-                            <h className="errorDeductionAmount">-1</h>
-                            <h className="errorDeductionTitle">Deduction</h>
-                        </div>
-                    </div>
-                </div>
-                <div className="errorCard">
-                    <div className="errorTitle">
-                        <h>Error #1</h>
-                        <button>Toggle</button>
-                    </div>
-                    <div className="errorComparison">
-                        <div className="errorCompBox">
-                            <p className="errorCompBoxText">This</p>
-                        </div>
-                        <svg style={{"margin": "-15px"}} fill="#40424b" width="60px" height="60px" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m10.211 7.155c-.141-.108-.3-.157-.456-.157-.389 0-.755.306-.755.749v8.501c0 .445.367.75.755.75.157 0 .316-.05.457-.159 1.554-1.203 4.199-3.252 5.498-4.258.184-.142.29-.36.29-.592 0-.23-.107-.449-.291-.591zm.289 7.563v-5.446l3.522 2.719z" fill-rule="nonzero"/></svg>
-                        <div className="errorCompBox">
-                            <p className="errorCompBoxText">To This</p>
-                        </div>
-                        <div className="errorDeduction">
-                            <h className="errorDeductionAmount">-1</h>
-                            <h className="errorDeductionTitle">Deduction</h>
-                        </div>
-                    </div>
-                </div>
+                {errors.map(error => (
+                    <ErrorCard title={"Error " + error.id} preText={error.preText} postText={error.postText} deduction={error.deduction}/>
+                ))}
             </section>
             <section className="topQuickToolStats" style={{"margin-top": "auto"}}>
                 <EvalButton title="Grade Options" callback={() => {}}/>

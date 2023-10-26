@@ -1,0 +1,131 @@
+.errorCard{
+    background: #1E2133;
+    width: 100%;
+    height: 102px;
+    border-radius: 6px;
+    border-color: rgba(0, 0, 0, 0.22);
+    border-style: solid;
+    border-width: 1px;
+    margin-left: 14px;
+    margin-right: 14px;
+    margin-bottom: 14px;
+    position: relative;
+    color: white;
+    text-align: left;
+    overflow: hidden;
+}
+
+.errorCardSelect{
+    background: linear-gradient(45deg, rgba(237, 75, 255, 0.25), rgba(75, 75, 255, 0.25));
+}
+
+.errorCard::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    background: linear-gradient(45deg, var(--accent-purple), var(--accent-blue));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+.errorComparison {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.errorTitle {
+    margin: 5px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3px;
+    font-weight: 700;
+}
+
+.errorCompBox {
+    background: #282C34;
+    height: 60px;
+    width: 130px;
+    border-radius: 5px;
+    margin: 5px;
+    position: relative;
+}
+
+.errorCompBoxText {
+    margin: 5px;
+}
+.errorDeduction {
+    height: 60px;
+    width: 95px;
+    border-radius: 5px;
+    margin: 6px;
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    background: #282C34;
+    position: relative;
+}
+
+.errorDeduction::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    background: linear-gradient(45deg, var(--accent-purple), var(--accent-blue));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+.errorDeductionAmount {
+    font-size: 25px;
+    margin-left: 10px;
+    margin-top: 5px;
+    line-height: 30px;
+    font-weight: 600;
+}
+
+.errorDeductionTitle {
+    margin-left: 10px;
+    font-weight: 300;
+}
+
+.errorToggleBacking {
+    background: blue;
+    width: 50px;
+    height: 15px;
+    margin-left: auto;
+    background: linear-gradient(45deg, rgba(237, 75, 255, 0.18), rgba(75, 75, 255, 0.18));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    margin-top: 3px;
+    margin-right: 5px;
+}
+
+.errorToggleTicker {
+    background: linear-gradient(45deg, var(--accent-purple), var(--accent-blue));
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+}
+
+.errorBackingTicked{
+    background: linear-gradient(45deg, rgba(237, 75, 255, 0.89), rgba(75, 75, 255, 0.91));
+}
+
+.errorTickerTicked {
+    margin-left: auto;
+}

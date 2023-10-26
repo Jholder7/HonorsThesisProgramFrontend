@@ -4,14 +4,10 @@ import "./atom-one-dark.css"
 import Highlight from 'react-highlight'
 
 function ToggleButton (props) {
-    const [isSelected, setSelected] = useState();
-
-    useEffect(() => {
-        setSelected(props.initialState)
-    }, [props.initialState]);
+    const [isSelected, setSelected] = useState(props.initialState);
 
     return (
-        <button onClick={() => {setSelected(!isSelected); if (props.onClick != null) props.onClick()}} className={`toggleButton ${isSelected ? 'backgroundTicked' : ''}`}>
+        <button onClick={() => {setSelected(!isSelected); if (props.onClick != null) props.onClick()}} className={`toggleButton ${isSelected ? '.errorCardSelect' : ''}`}>
             <header>
                 <link rel="stylesheet" href="ToggleButton.css" />
                 <link rel="stylesheet" href="atom-one-dark.css"/>
