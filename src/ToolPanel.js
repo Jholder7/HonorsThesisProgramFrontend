@@ -10,10 +10,19 @@ import OptionTabs from "./OptionComponents/OptionTabs";
 import ErrorCard from "./ErrorCard"
 import "./resources/arrow.svg"
 import {useLocalStorage} from "@uidotdev/usehooks";
+import FinalGrade from "./StatBoxes/FinalGrade";
+import UWGrade from "./StatBoxes/UWGrade";
+import TotalDeducts from "./StatBoxes/TotalDeducts";
+import GradeModel from "./GradeModel";
 
 function ToolPanel() {
     const [errors, setErrors] = useState([])
     const [settings, saveSettings] = useLocalStorage("settings", [])
+
+    const [bracketGradeOptions, setBracketGradeOptions] = useLocalStorage("BGO",[1, 10, 25]);
+    const [spaceGradeOptions, setSpaceGradeOptions] = useLocalStorage("SGO",[1, 10, 25]);
+    const [tabGradeOptions, setTabGradeOptions] = useLocalStorage("TGO",[1, 10, 25]);
+    const [newlineGradeOptions, setNewlineGradeOptions] = useLocalStorage("LGO",[1, 10, 25]);
 
     function setStyleErrors(count) {
     }
@@ -63,12 +72,73 @@ function ToolPanel() {
                 });
                 let id = 1;
                 setErrors([]);
+                let deductArr = []
                 data.issueSegmentLiterals.forEach((segmentLiteral) => {
-                    let newSegLit = {"id": id, "preText": segmentLiteral.segmentLiteralData[0], "postText": segmentLiteral.segmentLiteralData[1], "deduction": parseFloat(segmentLiteral.segmentLiteralData[2])};
+                    let newSegLit = {"id": id, "preText": segmentLiteral.segmentLiteralData[0], "postText": segmentLiteral.segmentLiteralData[1], "deduction": getCardGrade(segmentLiteral.segmentLiteralData[2])};
+                    deductArr.push(segmentLiteral.segmentLiteralData[2])
                     setErrors(prevState => [...prevState, newSegLit]);
                     id++;
                 });
+                calculateGrade(deductArr);
             });
+    }
+
+    function getCardGrade(deductStr) {
+        let pointDeduct = 0;
+        if (deductStr == null) {return pointDeduct}
+        if (deductStr.includes("B")) {
+            pointDeduct += bracketGradeOptions[0];
+        }
+        if (deductStr.includes("S")) {
+            pointDeduct += spaceGradeOptions[0];
+        }
+        if (deductStr.includes("T")) {
+            pointDeduct += tabGradeOptions[0];
+        }
+        if (deductStr.includes("N")) {
+            pointDeduct += newlineGradeOptions[0];
+        }
+        return pointDeduct;
+    }
+
+    function calculateGrade(deducts) {
+        let bracketDeduct = 0;
+        let spaceDeduct = 0;
+        let tabDeduct = 0;
+        let newlineDeduct = 0;
+        deducts.forEach((deductStr) => {
+            if (deductStr.includes("B")) {
+                bracketDeduct += bracketGradeOptions[0];
+            }
+            if (deductStr.includes("S")) {
+                spaceDeduct += spaceGradeOptions[0];
+            }
+            if (deductStr.includes("T")) {
+                tabDeduct += tabGradeOptions[0];
+            }
+            if (deductStr.includes("N")) {
+                newlineDeduct += newlineGradeOptions[0];
+            }
+        })
+        let bracketGrade = (bracketGradeOptions[1] - bracketDeduct) / bracketGradeOptions[1]*100
+        if (bracketGrade < 0) {bracketGrade = 0;}
+
+        let spaceGrade = (spaceGradeOptions[1] - spaceDeduct) / spaceGradeOptions[1]*100
+        if (spaceGrade < 0) {spaceGrade = 0;}
+
+        let tabGrade = (tabGradeOptions[1] - tabDeduct) / tabGradeOptions[1]*100
+        if (tabGrade < 0) {tabGrade = 0;}
+
+        let newlineGrade = (newlineGradeOptions[1] - newlineDeduct) / newlineGradeOptions[1]*100
+        if (newlineGrade < 0) {newlineGrade = 0;}
+
+        let finalGrade = (bracketGrade * bracketGradeOptions[2]/100) + (spaceGrade * spaceGradeOptions[2]/100) + (tabGrade * tabGradeOptions[2]/100) + (newlineGrade * newlineGradeOptions[2]/100);
+        FinalGrade.setValue(finalGrade+"%");
+        let uwGrade = (bracketGrade+spaceGrade+tabGrade+newlineGrade)/4;
+        UWGrade.setValue(uwGrade+"%");
+        let totalDeducts = bracketDeduct+spaceDeduct+tabDeduct+newlineDeduct;
+        // console.log(totalDeducts);
+        TotalDeducts.setValue(totalDeducts);
     }
 
     return (
@@ -81,13 +151,18 @@ function ToolPanel() {
                 <ETCR value="--%"/>
                 <CommentCount value="--"/>
             </section>
+            <section style={{"margin-top": "-15px"}} className="topQuickToolStats">
+                <FinalGrade value="--%"/>
+                <UWGrade value="--%"/>
+                <TotalDeducts value="--"/>
+            </section>
             <section className="errorSection">
                 {errors.map(error => (
                     <ErrorCard title={"Error " + error.id} preText={error.preText} postText={error.postText} deduction={error.deduction}/>
                 ))}
             </section>
             <section className="topQuickToolStats" style={{"margin-top": "auto"}}>
-                <EvalButton title="Grade Options" callback={() => {}}/>
+                <EvalButton title="Grade Options" callback={() => {App.setGradeIsOpen(true)}}/>
                 <EvalButton title="Style Options" callback={() =>{App.setSettingsIsOpen(true)}}/>
             </section>
         </div>

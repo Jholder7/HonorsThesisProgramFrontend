@@ -3,10 +3,14 @@ import SourceCodeViewer from "./SourceCodeViewer";
 import ToolPanel from "./ToolPanel";
 import SettingsModal from "./SettingsModal";
 import {useState} from "react";
+import GradeModel from "./GradeModel";
 
 function App() {
     const [isSettingsOpen, setSettingsIsOpen] = useState(false);
     App.setSettingsIsOpen = setSettingsIsOpen;
+
+    const [isGradeOpen, setGradeIsOpen] = useState(false);
+    App.setGradeIsOpen = setGradeIsOpen;
 
     let apiBaseServer = "http://localhost:8080"
     function getApiBaseAddress(){
@@ -29,6 +33,7 @@ function App() {
       </div>
       <div>
           {isSettingsOpen && <SettingsModal setIsOpen={setSettingsIsOpen}/>}
+          {isGradeOpen && <GradeModel setIsOpen={setGradeIsOpen}/>}
       </div>
     </div>
   );

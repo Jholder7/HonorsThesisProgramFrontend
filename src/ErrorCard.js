@@ -17,9 +17,9 @@ function ErrorCard(props) {
             </header>
             <div className="errorTitle">
                 <h>{props.title}</h>
-                <div className={`errorToggleBacking ${isSelected ? 'errorBackingTicked' : ''}`}>
-                    <div className={`errorToggleTicker ${isSelected ? 'errorTickerTicked' : ''}`}></div>
-                </div>
+                {/*<div className={`errorToggleBacking ${isSelected ? 'errorBackingTicked' : ''}`}>*/}
+                {/*    <div className={`errorToggleTicker ${isSelected ? 'errorTickerTicked' : ''}`}></div>*/}
+                {/*</div>*/}
             </div>
             <div className="errorComparison">
                 <div className="errorCompBox">
@@ -30,7 +30,7 @@ function ErrorCard(props) {
                     <p className="errorCompBoxText">{props.postText}</p>
                 </div>
                 <div className="errorDeduction">
-                    <h className="errorDeductionAmount">{props.deduction}</h>
+                    <h className="errorDeductionAmount">-{props.deduction}</h>
                     <h className="errorDeductionTitle">Deduction</h>
                 </div>
             </div>

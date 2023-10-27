@@ -8,8 +8,8 @@ function ETCR(props) {
 
     return (
         <div className="statBox">
-            <h1 className="statBoxNumber">{value}</h1>
-            <h3 className="statBoxTitle">ETCR</h3>
+            <h1 className="statBoxNumber">{value}%</h1>
+            <h3 className="statBoxTitle">ECP</h3>
         </div>
     );
 }

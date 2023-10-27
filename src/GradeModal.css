@@ -1,0 +1,38 @@
+.gradeOptions {
+    position: absolute;
+    top: 41px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.optionLine {
+    display: flex;
+    height: 50px;
+    align-items: center;
+}
+
+.optionInput {
+    height: 20px;
+    margin: 50px;
+    background: #1E2133;
+    border-color: gray;
+    border-style: solid;
+    border-radius: 5px;
+    padding-left: 2px;
+    color: white;
+}
+
+.columnTitle {
+    font-size: 15px;
+    margin-right: 150px;
+}
+
+.rowTitle {
+    font-size: 15px;
+    margin-right: 50px;
+}
