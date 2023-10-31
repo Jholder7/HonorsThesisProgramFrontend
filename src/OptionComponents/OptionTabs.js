@@ -19,7 +19,6 @@ function OptionTabs() {
         saveSettings(tempSettings);
     }
 
-    //TODO: make the elements hidden don't un render them to keep their state persistent (useLocalStorage then passe to each button to implement with)
     return (
         <div className="optionsTab">
             <header>
@@ -47,7 +46,7 @@ function OptionTabs() {
                 <button onClick={() => {setTab(6)}} className={`tab ${tab === 6 ? 'selectedTab' : ''}`}>
                     <h1 className="tabTitle">Object C Options</h1>
                 </button>
-                <button style={{"margin-left": "auto"}} onClick={() => {console.log(settings)}}>list</button>
+                <button style={{"margin-left": "auto"}} onClick={() => {console.log(settings);}}>debug</button>
                 <button onClick={() => {saveSettings([])}}>clear</button>
             </section>
             {getSettingsPage(tab)}
