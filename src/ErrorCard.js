@@ -1,5 +1,7 @@
 import React, {useState} from "react";
 import "./ErrorCard.css"
+import ToolPanel from "./ToolPanel";
+
 
 function ErrorCard(props) {
 
@@ -11,7 +13,23 @@ function ErrorCard(props) {
     ErrorCard.selected = selected;
 
     return (
-        <div onClick={() => {setSelected(!isSelected)}} className={`errorCard ${isSelected ? 'errorCardSelect' : ''}`}>
+        <div onClick={() => {
+            if (isSelected) {
+                ToolPanel.setExcludes(prevState => [...prevState, props.title.charAt(props.title.length - 1)])
+            } else {
+                ToolPanel.setExcludes(prevState => {
+                    let tempExcludes = []
+                    prevState.forEach(el => {
+                        if (el != props.title.charAt(props.title.length - 1)){
+                            tempExcludes.push(el);
+                        }
+                    })
+                    return tempExcludes
+                })
+            }
+            setTimeout(() => {ToolPanel.CardRegrade();}, 500);
+            setSelected(!isSelected);
+        }} className={`errorCard ${isSelected ? 'errorCardSelect' : ''}`}>
             <header>
                 <link type="text/css" rel="stylesheet" href="ErrorCard.css" />
             </header>

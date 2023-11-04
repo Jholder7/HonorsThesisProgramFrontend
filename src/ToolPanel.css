@@ -35,3 +35,8 @@
     align-items: center;
     scrollbar-width: thin;
 }
+
+.sectionBreak{
+    border-top: #1E2133 solid 2px;
+}
+

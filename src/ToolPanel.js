@@ -1,5 +1,5 @@
 import "./ToolPanel.css"
-import React, {useState} from "react";
+import React, {createRef, useState} from "react";
 import StyleErrors from "./StatBoxes/StyleErrors";
 import ETCR from "./StatBoxes/ETCR";
 import CommentCount from "./StatBoxes/CommentCount";
@@ -14,10 +14,14 @@ import FinalGrade from "./StatBoxes/FinalGrade";
 import UWGrade from "./StatBoxes/UWGrade";
 import TotalDeducts from "./StatBoxes/TotalDeducts";
 import GradeModel from "./GradeModel";
+import DynamicToggle from "./DynamicToggle";
 
 function ToolPanel() {
     const [errors, setErrors] = useState([])
     const [settings, saveSettings] = useLocalStorage("settings", [])
+    const [excludes, setExcludes] = useState([])
+    ToolPanel.setExcludes = setExcludes;
+    const [recalcErrors, setRecalcErrors] = useState([]);
 
     const [bracketGradeOptions, setBracketGradeOptions] = useLocalStorage("BGO",[1, 10, 25]);
     const [spaceGradeOptions, setSpaceGradeOptions] = useLocalStorage("SGO",[1, 10, 25]);
@@ -46,7 +50,7 @@ function ToolPanel() {
         const req =  {
             fileTitle: SourceCodeViewer.getFileTitle(),
             fileContents: SourceCodeViewer.getSourceCode().replaceAll("\r", "").replaceAll("\"", "\u0022"),
-            settings: settings
+            settings: DynamicToggle.isSelected ? ["true"] : settings
         }
         let orig = SourceCodeViewer.getSourceCode()
         // console.log(OptionTabs.settings)
@@ -80,10 +84,23 @@ function ToolPanel() {
                     id++;
                 });
                 calculateGrade(deductArr);
+                setRecalcErrors(deductArr);
             });
     }
 
-    function getCardGrade(deductStr) {
+    function CardRegrade(){
+        let newDeductArr = []
+        for (let i = 0; i < recalcErrors.length; i++){
+            if (!excludes.includes((i+1).toString())) {
+                newDeductArr.push(recalcErrors[i]);
+            }
+        }
+        calculateGrade(newDeductArr)
+    }
+
+    ToolPanel.CardRegrade = CardRegrade;
+
+        function getCardGrade(deductStr) {
         let pointDeduct = 0;
         if (deductStr == null) {return pointDeduct}
         if (deductStr.includes("B")) {
@@ -161,9 +178,14 @@ function ToolPanel() {
                     <ErrorCard title={"Error " + error.id} preText={error.preText} postText={error.postText} deduction={error.deduction}/>
                 ))}
             </section>
-            <section className="topQuickToolStats" style={{"margin-top": "auto"}}>
+            <section className="topQuickToolStats sectionBreak" style={{"margin-top": "auto"}}>
+                <DynamicToggle onClick={() => {
+                    ToolPanel.evalTextUpdate();
+                }}/>
+            </section>
+            <section className="topQuickToolStats">
                 <EvalButton title="Grade Options" callback={() => {App.setGradeIsOpen(true)}}/>
-                <EvalButton title="Style Options" callback={() =>{App.setSettingsIsOpen(true)}}/>
+                <EvalButton title="Style Options" callback={() =>{if(!DynamicToggle.isSelected)App.setSettingsIsOpen(true)}}/>
             </section>
         </div>
     );
