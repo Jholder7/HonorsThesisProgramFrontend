@@ -54,6 +54,7 @@ function ToolPanel() {
         }
         let orig = SourceCodeViewer.getSourceCode()
         // console.log(OptionTabs.settings)
+        const start = performance.now()
         fetch(App.getApiBaseAddress()+"/api-v1/baseService/evalFile", {
             method: 'POST',
             headers: {
@@ -85,6 +86,8 @@ function ToolPanel() {
                 });
                 calculateGrade(deductArr);
                 setRecalcErrors(deductArr);
+                const end = performance.now()
+                SourceCodeViewer.setComputeTime(`${end - start}ms`);
             });
     }
 

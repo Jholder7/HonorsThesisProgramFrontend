@@ -14,8 +14,10 @@ function SourceCodeViewer() {
     let [markers, setMarkers] = useState([]);
     let [fileTitle, setFileTitle] = useState("FileName.java")
     let [status, setStatus] = useState("Waiting...")
+    let [computeTime, setComputeTime] = useState("0ms")
     SourceCodeViewer.setStatus = setStatus;
     SourceCodeViewer.setMarkers = setMarkers;
+    SourceCodeViewer.setComputeTime = setComputeTime;
 
     //TODO: Add count down timer from last edit and if no changes within 10 seconds re execute eval
     let OldValue = "-1";
@@ -99,6 +101,7 @@ function SourceCodeViewer() {
             <div className="sourceCodeFileHeader">
                 <h1 className="sourceCodeFileHeaderTitle">./<span className="sourceCodeFileHeaderName">{fileTitle}</span></h1>
                 <h1 className="sourceCodeFileHeaderInfo sourceCodeFileHeaderInfoSpacer">{status}</h1>
+                <h1 className="sourceCodeFileHeaderInfo" style={{"margin-right": "15px"}}>{computeTime}</h1>
                 <h1 className="sourceCodeFileHeaderInfo" style={{"margin-right": "15px"}}>UTF-8</h1>
                 <h1 id="lineCount" className="sourceCodeFileHeaderInfo">{lineCount} Lines</h1>
             </div>
