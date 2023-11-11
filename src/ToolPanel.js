@@ -178,7 +178,7 @@ function ToolPanel() {
             </section>
             <section className="errorSection">
                 {errors.map(error => (
-                    <ErrorCard title={"Error " + error.id} preText={error.preText} postText={error.postText} deduction={error.deduction}/>
+                    <ErrorCard title={"Style Violation " + error.id} preText={error.preText} postText={error.postText} deduction={error.deduction}/>
                 ))}
             </section>
             <section className="topQuickToolStats sectionBreak" style={{"margin-top": "auto"}}>
