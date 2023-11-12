@@ -67,6 +67,9 @@ function ToolPanel() {
                 StyleErrors.setValue(data.styleErrors)
                 ETCR.setValue(data.ETCR)
                 CommentCount.setValue(data.CommentCount)
+                if (data.issueSegments == null) {
+                    return null;
+                }
                 data.issueSegments.forEach((segment) => {
                     let source = SourceCodeViewer.getSourceCode().replaceAll("\r", "").replaceAll("\"", "\u0022")
                     let x = source.slice(0, segment.segmentData[0]).split("\n").length-1;
