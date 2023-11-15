@@ -171,7 +171,7 @@ function ToolPanel() {
             </header>
             <section className="topQuickToolStats">
                 <StyleErrors value="--"/>
-                <ETCR value="--%"/>
+                <ETCR value="--"/>
                 <CommentCount value="--"/>
             </section>
             <section style={{"margin-top": "-15px"}} className="topQuickToolStats">
