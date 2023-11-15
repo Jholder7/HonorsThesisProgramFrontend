@@ -41,10 +41,10 @@ const GradeModel = ({ setIsOpen }) => {
     }, [bracketGradeOptions, spaceGradeOptions, tabGradeOptions, newlineGradeOptions, bracketD, bracketT, bracketW, spaceD, spaceT, spaceW, tabD, tabT, tabW, newlineD, newlineT, newlineW]);
 
     function updateGradeSettings() {
-        setBracketGradeOptions([parseInt(bracketD.current.value), parseInt(bracketT.current.value), parseInt(bracketW.current.value)]);
-        setSpaceGradeOptions([parseInt(spaceD.current.value), parseInt(spaceT.current.value), parseInt(spaceW.current.value)]);
-        setTabGradeOptions([parseInt(tabD.current.value), parseInt(tabT.current.value), parseInt(tabW.current.value)]);
-        setNewlineGradeOptions([parseInt(newlineD.current.value), parseInt(newlineT.current.value), parseInt(newlineW.current.value)]);
+        setBracketGradeOptions([parseFloat(bracketD.current.value), parseFloat(bracketT.current.value), parseFloat(bracketW.current.value)]);
+        setSpaceGradeOptions([parseFloat(spaceD.current.value), parseFloat(spaceT.current.value), parseFloat(spaceW.current.value)]);
+        setTabGradeOptions([parseFloat(tabD.current.value), parseFloat(tabT.current.value), parseFloat(tabW.current.value)]);
+        setNewlineGradeOptions([parseFloat(newlineD.current.value), parseFloat(newlineT.current.value), parseFloat(newlineW.current.value)]);
     }
 
     return (
