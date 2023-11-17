@@ -174,7 +174,7 @@ function ToolPanel() {
                 <ETCR value="--"/>
                 <CommentCount value="--"/>
             </section>
-            <section style={{"margin-top": "-15px"}} className="topQuickToolStats">
+            <section style={{"margin-top": "-15px"}} className="topQuickToolStats sectionBreakTop">
                 <FinalGrade value="--%"/>
                 <UWGrade value="--%"/>
                 <TotalDeducts value="--"/>

@@ -36,7 +36,11 @@
     scrollbar-width: thin;
 }
 
-.sectionBreak{
+.sectionBreak {
     border-top: #1E2133 solid 2px;
+}
+
+.sectionBreakTop {
+    border-bottom: #1E2133 solid 2px;
 }
 
