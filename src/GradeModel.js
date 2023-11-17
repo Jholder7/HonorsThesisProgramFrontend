@@ -41,10 +41,27 @@ const GradeModel = ({ setIsOpen }) => {
     }, [bracketGradeOptions, spaceGradeOptions, tabGradeOptions, newlineGradeOptions, bracketD, bracketT, bracketW, spaceD, spaceT, spaceW, tabD, tabT, tabW, newlineD, newlineT, newlineW]);
 
     function updateGradeSettings() {
-        setBracketGradeOptions([parseFloat(bracketD.current.value), parseFloat(bracketT.current.value), parseFloat(bracketW.current.value)]);
-        setSpaceGradeOptions([parseFloat(spaceD.current.value), parseFloat(spaceT.current.value), parseFloat(spaceW.current.value)]);
-        setTabGradeOptions([parseFloat(tabD.current.value), parseFloat(tabT.current.value), parseFloat(tabW.current.value)]);
-        setNewlineGradeOptions([parseFloat(newlineD.current.value), parseFloat(newlineT.current.value), parseFloat(newlineW.current.value)]);
+        let validatedBracketD = (!isNaN(bracketD.current.value) && parseFloat(bracketD.current.value) >= 0) ? parseFloat(bracketD.current.value) : 0
+        let validatedBracketT = (!isNaN(bracketT.current.value) && parseFloat(bracketT.current.value) >= 0) ? parseFloat(bracketT.current.value) : 0
+        let validatedBracketW = (!isNaN(bracketW.current.value) && parseFloat(bracketW.current.value) >= 0) ? parseFloat(bracketW.current.value) : 0
+        setBracketGradeOptions([validatedBracketD, validatedBracketT, validatedBracketW]);
+
+        let validatedSpaceD = (!isNaN(spaceD.current.value) && parseFloat(spaceD.current.value) >= 0) ? parseFloat(spaceD.current.value) : 0
+        let validatedSpaceT = (!isNaN(spaceT.current.value) && parseFloat(spaceT.current.value) >= 0) ? parseFloat(spaceT.current.value) : 0
+        let validatedSpaceW = (!isNaN(spaceW.current.value) && parseFloat(spaceW.current.value) >= 0) ? parseFloat(spaceW.current.value) : 0
+        setSpaceGradeOptions([validatedSpaceD, validatedSpaceT, validatedSpaceW]);
+
+        let validatedTabD = (!isNaN(tabD.current.value) && parseFloat(tabD.current.value) >= 0) ? parseFloat(tabD.current.value) : 0
+        let validatedTabT = (!isNaN(tabT.current.value) && parseFloat(tabT.current.value) >= 0) ? parseFloat(tabT.current.value) : 0
+        let validatedTabW = (!isNaN(tabW.current.value) && parseFloat(tabW.current.value) >= 0) ? parseFloat(tabW.current.value) : 0
+        setTabGradeOptions([validatedTabD, validatedTabT, validatedTabW]);
+
+        let validatedNewlineD = (!isNaN(newlineD.current.value) && parseFloat(newlineD.current.value) >= 0) ? parseFloat(newlineD.current.value) : 0
+        let validatedNewlineT = (!isNaN(newlineT.current.value) && parseFloat(newlineT.current.value) >= 0) ? parseFloat(newlineT.current.value) : 0
+        let validatedNewlineW = (!isNaN(newlineW.current.value) && parseFloat(newlineW.current.value) >= 0) ? parseFloat(newlineW.current.value) : 0
+        setNewlineGradeOptions([validatedNewlineD, validatedNewlineT, validatedNewlineW]);
+
+        ToolPanel.evalTextUpdate();
     }
 
     return (
@@ -57,7 +74,7 @@ const GradeModel = ({ setIsOpen }) => {
                 <section className="settingsManu">
                     <div className="titleBar">
                         <h3 className="title">Grade Options</h3>
-                        <button className="exitButton" onClick={() =>{ToolPanel.evalTextUpdate(); App.setGradeIsOpen(false); updateGradeSettings();}}>✖</button>
+                        <button className="exitButton" onClick={() =>{updateGradeSettings(); App.setGradeIsOpen(false);}}>✖</button>
                     </div>
                     <section className="gradeOptions">
                         <div className="optionLine">

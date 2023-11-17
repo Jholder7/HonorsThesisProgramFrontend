@@ -71,6 +71,7 @@
     flex-direction: column;
     background: #282C34;
     position: relative;
+    overflow: hidden;
 }
 
 .errorDeduction::before {
